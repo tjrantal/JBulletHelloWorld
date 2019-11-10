@@ -1,0 +1,39 @@
+apply plugin: 'java'
+
+repositories {
+       mavenCentral()
+}
+
+configurations {
+    // configuration that holds jars to include in the jar
+    extraLibs
+}
+
+dependencies {
+
+	// https://mvnrepository.com/artifact/javax.vecmath/vecmath
+	compile group: 'javax.vecmath', name: 'vecmath', version: '1.5.2'
+	extraLibs group: 'javax.vecmath', name: 'vecmath', version: '1.5.2'
+
+	// https://mvnrepository.com/artifact/cz.advel.jbullet/jbullet
+	compile group: 'cz.advel.jbullet', name: 'jbullet', version: '20101010-1'
+	extraLibs group: 'cz.advel.jbullet', name: 'jbullet', version: '20101010-1'
+
+   configurations.compile.extendsFrom(configurations.extraLibs)
+}
+
+
+
+sourceCompatibility = 1.6
+version = '1.0'
+jar {
+	manifest {
+	  attributes	'Implementation-Title': 'JBullet Test',
+		         	'Implementation-Version': version,
+						'Main-Class': 'timo.home.HelloWorld'
+	}
+	from {
+		configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+}
+

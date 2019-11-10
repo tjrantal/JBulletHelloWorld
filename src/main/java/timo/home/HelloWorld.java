@@ -54,6 +54,10 @@ import com.bulletphysics.linearmath.IDebugDraw;
  * it is a direct translation of the C++ HelloWorld app.
  *
  * @author cdorman
+ 
+ Modified by Timo Rantalainen 2019 tjrantal at gmail dot com
+ Wanted to explore how to get access to implementing air drag and Magnus force with JBullet. ActionInterface seems to provide that opportunity
+ 
  */
 public class HelloWorld
 {
@@ -67,7 +71,7 @@ public class HelloWorld
 		}
 		@Override
 		public void updateAction(CollisionWorld collisionWorld, float deltaTimeStep){
-			//Do air drag calculations here
+			//Do air drag calculations here, just a demo that a side-ways force does take effect without removing collisions and gravity
 			obj.applyCentralForce(new Vector3f(-10f,0f,0f));	//Apply magnus force
 		}
 		@Override
